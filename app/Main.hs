@@ -31,6 +31,7 @@ toOutputFormat "tty" = Just Hadolint.TTY
 toOutputFormat "codeclimate" = Just Hadolint.CodeclimateJson
 toOutputFormat "checkstyle" = Just Hadolint.Checkstyle
 toOutputFormat "codacy" = Just Hadolint.Codacy
+toOutputFormat "gitlab" = Just Hadolint.GitlabJson
 toOutputFormat _ = Nothing
 
 showFormat :: Hadolint.OutputFormat -> String
@@ -39,6 +40,7 @@ showFormat Hadolint.TTY = "tty"
 showFormat Hadolint.CodeclimateJson = "codeclimate"
 showFormat Hadolint.Checkstyle = "checkstyle"
 showFormat Hadolint.Codacy = "codacy"
+showFormat Hadolint.GitlabJson = "gitlab"
 
 parseOptions :: Parser CommandOptions
 parseOptions =
@@ -65,10 +67,10 @@ parseOptions =
             (long "format" <> -- options for the output format
              short 'f' <>
              help
-                 "The output format for the results [tty | json | checkstyle | codeclimate | codacy]" <>
+                 "The output format for the results [tty | json | checkstyle | codeclimate | codacy | gitlab ]" <>
              value Hadolint.TTY <> -- The default value
              showDefaultWith showFormat <>
-             completeWith ["tty", "json", "checkstyle", "codeclimate", "codacy"])
+             completeWith ["tty", "json", "checkstyle", "codeclimate", "codacy", "gitlab" ])
     --
     -- | Parse a list of ignored rules
     ignoreList =

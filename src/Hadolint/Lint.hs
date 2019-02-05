@@ -12,6 +12,7 @@ import System.Exit (exitFailure, exitSuccess)
 import qualified Hadolint.Formatter.Checkstyle as Checkstyle
 import qualified Hadolint.Formatter.Codacy as Codacy
 import qualified Hadolint.Formatter.Codeclimate as Codeclimate
+import qualified Hadolint.Formatter.Gitlab as Gitlab
 import qualified Hadolint.Formatter.Format as Format
 import qualified Hadolint.Formatter.Json as Json
 import qualified Hadolint.Formatter.TTY as TTY
@@ -32,6 +33,7 @@ data OutputFormat
     | CodeclimateJson
     | Checkstyle
     | Codacy
+    | GitlabJson
     deriving (Show, Eq)
 
 printResultsAndExit :: OutputFormat -> Format.Result Text DockerfileError -> IO ()
@@ -48,6 +50,7 @@ printResultsAndExit format allResults = do
             Checkstyle -> Checkstyle.printResult res
             CodeclimateJson -> Codeclimate.printResult res >> exitSuccess
             Codacy -> Codacy.printResult res >> exitSuccess
+            GitlabJson -> Gitlab.printResult res
 
 -- | Performs the process of parsing the dockerfile and analyzing it with all the applicable
 -- rules, depending on the list of ignored rules.
