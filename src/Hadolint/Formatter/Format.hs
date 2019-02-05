@@ -13,7 +13,7 @@ module Hadolint.Formatter.Format
 import Data.List (sort)
 import qualified Data.List.NonEmpty as NE
 import Data.Monoid (Monoid)
-import Data.Semigroup
+-- import Data.Semigroup
 import qualified Data.Sequence as Seq
 import Data.Sequence (Seq)
 import Hadolint.Rules
